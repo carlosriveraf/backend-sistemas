@@ -1,16 +1,11 @@
 const express = require('express')
 const router = express.Router()
 const connection = require('../database')
+const usuario = require('../controllers/usuario')
 
 module.exports = app => {
     
-    router.get('/', (req, res) => {
-        connection.query("SELECT * FROM usuario", (err, result, fields) => {
-            if (err) throw err;
-            console.log(result);
-        })
-        res.send('works')
-    })
+    router.get('/', usuario.findAll )
 
     app.use(router)
 }
