@@ -8,4 +8,4 @@ router.get('/:id', user.findById)
 router.put('/:id', user.update)
 router.delete('/:id', user.delete)
 
-module.exports = router;
+module.exports = router

@@ -5,7 +5,7 @@ const district = require('../controllers/district')
 router.post('/create', district.create)
 router.get('/all', district.findAll)
 router.get('/:id', district.findById)
-
+router.put('/:id', district.update)
 router.delete('/:id', district.delete)
 
-module.exports = router;
+module.exports = router
