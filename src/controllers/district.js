@@ -1,6 +1,6 @@
-const db = require("../models");
-const { District } = db;
-const { Op } = db.Sequelize;
+const db = require("../models")
+const { District } = db
+const { Op } = db.Sequelize
 const ctrl = {}
 
 ctrl.create = (req, res) => {
@@ -11,7 +11,7 @@ ctrl.create = (req, res) => {
 
   District.create(newDistrict)
     .then(data => {
-      res.send(data);
+      res.send(data)
     })
     .catch(err => {
       res.status(500).send({
@@ -22,29 +22,52 @@ ctrl.create = (req, res) => {
 }
 
 ctrl.findById = (req, res) => {
-    const id = req.params.id;
-    District.findByPk(id)
-      .then(data => {
-        res.send(data)
+  const id = req.params.id
+  District.findByPk(id)
+    .then(data => {
+      res.send(data)
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error retrieving District with id=" + id
       })
-      .catch(err => {
-        res.status(500).send({
-          message: "Error retrieving Tutorial with id=" + id
-        })
-      })
-  }
+    })
+}
   
-  ctrl.findAll = (req, res) => {
-    District.findAll()
-      .then(data => {
-        res.send(data);
+ctrl.findAll = (req, res) => {
+  District.findAll()
+    .then(data => {
+      res.send(data)
+    })
+    .catch(err => {
+      res.status(500).send({
+        message:
+          err.message || "Some error occurred while retrieving districts."
       })
-      .catch(err => {
-        res.status(500).send({
-          message:
-            err.message || "Some error occurred while retrieving tutorials."
+    })
+}
+
+ctrl.delete = (req, res) => {
+  const id = req.params.id
+  District.destroy({
+    where: { id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "District was deleted successfully!"
         })
+      } else {
+        res.send({
+          message: `Cannot delete District with id=${id}. Maybe District was not found!`
+        })
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete District with id=" + id
       })
-    }
+    })
+}
 
 module.exports = ctrl

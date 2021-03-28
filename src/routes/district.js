@@ -6,4 +6,6 @@ router.post('/create', district.create)
 router.get('/all', district.findAll)
 router.get('/:id', district.findById)
 
+router.delete('/:id', district.delete)
+
 module.exports = router;

@@ -1,13 +1,13 @@
-const db = require("../models");
-const { User } = db;
-const { Op } = db.Sequelize;
+const db = require("../models")
+const { User } = db
+const { Op } = db.Sequelize
 const ctrl = {}
 
 ctrl.create = (req, res) => {
   const newUser = {
     id: req.body.id,
-    first_name: req.body.first_name,
-    last_name: req.body.last_name,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
     password: req.body.password,
     email: req.body.email,
     districtId: req.body.districtId
@@ -26,7 +26,7 @@ ctrl.create = (req, res) => {
 }
 
 ctrl.findById = (req, res) => {
-  const id = req.params.id;
+  const id = req.params.id
   User.findByPk(id)
     .then(data => {
       res.send(data)
@@ -41,7 +41,7 @@ ctrl.findById = (req, res) => {
 ctrl.findAll = (req, res) => {
   User.findAll()
     .then(data => {
-      res.send(data);
+      res.send(data)
     })
     .catch(err => {
       res.status(500).send({
@@ -49,6 +49,53 @@ ctrl.findAll = (req, res) => {
           err.message || "Some error occurred while retrieving tutorials."
       })
     })
-  }
+}
+
+ctrl.delete = (req, res) => {
+  const id = req.params.id
+  User.destroy({
+    where: { id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "User was deleted successfully!"
+        })
+      } else {
+        res.send({
+          message: `Cannot delete User with id=${id}. Maybe User was not found!`
+        })
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Could not delete User with id=" + id
+      })
+    })
+}
+
+ctrl.update = (req, res) => {
+  const id = req.params.id
+
+  User.update(req.body, {
+    where: { id: id }
+  })
+    .then(num => {
+      if (num == 1) {
+        res.send({
+          message: "User was updated successfully."
+        })
+      } else {
+        res.send({
+          message: `Cannot update User with id=${id}. Maybe User was not found or req.body is empty!`
+        })
+      }
+    })
+    .catch(err => {
+      res.status(500).send({
+        message: "Error updating User with id=" + id
+      })
+    })
+}
 
 module.exports = ctrl

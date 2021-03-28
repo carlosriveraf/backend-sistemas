@@ -8,7 +8,7 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         type: Sequelize.STRING(100),
         primaryKey: true
       },
-      eca_value: {
+      ecaValue: {
         type: Sequelize.FLOAT,
         allowNull: false
       }
