@@ -6,11 +6,21 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
   dialect: 'mysql'
 })
 
-const db = {};
+const db = {}
 
-db.Sequelize = Sequelize;
-db.sequelize = sequelize;
+db.Sequelize = Sequelize
+db.sequelize = sequelize
 
-db.Usuario = require("./usuario")(sequelize, Sequelize, DataTypes);
+db.User = require("./user")(sequelize, Sequelize, DataTypes)
+db.District = require("./district")(sequelize, Sequelize, DataTypes)
+db.Zone = require("./zone")(sequelize, Sequelize, DataTypes)
+db.Variable = require("./variable")(sequelize, Sequelize, DataTypes)
+db.Measurement = require("./measurement")(sequelize, Sequelize, DataTypes)
 
-module.exports = db;
+// Asociaciones
+db.User.belongsTo(db.District, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
+db.Zone.belongsTo(db.District, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
+db.Measurement.belongsTo(db.Zone, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
+db.Measurement.belongsTo(db.Variable, { foreignKey: { allowNull: false }, onDelete: 'CASCADE' })
+
+module.exports = db

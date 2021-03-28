@@ -1,12 +1,13 @@
 /* const express = require('express'); */
 const routes = require('../routes/index');
+const bodyParser = require("body-parser");
 
 module.exports = app => {
     // Settings
-    app.set('port', process.env.PORT || 3000);
+    app.set('port', process.env.PORT);
    
-    // Database conexion
-    require('../database');
+    app.use(bodyParser.json())
+    app.use(bodyParser.urlencoded({ extended: true }))
 
     // Routes
     routes(app);

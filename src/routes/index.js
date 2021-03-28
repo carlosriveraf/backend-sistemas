@@ -1,11 +1,5 @@
-const express = require('express')
-const router = express.Router()
-const connection = require('../database')
-const usuario = require('../controllers/usuario')
-
 module.exports = app => {
-    
-    router.get('/', usuario.findAll )
-
-    app.use(router)
+    app.use('/', require('./home'))
+    app.use('/user', require('./user'))
+    app.use('/district', require('./district'))
 }
