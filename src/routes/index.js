@@ -1,8 +1,12 @@
-module.exports = app => {
-    app.use('/', require('./home'))
-    app.use('/user', require('./user'))
-    app.use('/district', require('./district'))
-    app.use('/zone', require('./zone'))
-    app.use('/variable', require('./variable'))
-    app.use('/measurement', require('./measurement'))
-}
+const { Router } = require('express');
+
+const router = Router();
+
+router.use('/', require('./home'));
+router.use('/user', require('./user'));
+router.use('/district', require('./district'));
+router.use('/zone', require('./zone'));
+router.use('/variable', require('./variable'));
+router.use('/measurement', require('./measurement'));
+
+module.exports = router;

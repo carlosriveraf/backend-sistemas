@@ -1,11 +1,12 @@
-const express = require('express')
-const router = express.Router()
-const district = require('../controllers/district')
+const { Router } = require('express');
+const district = require('../controllers/district');
 
-router.post('/create', district.create)
-router.get('/all', district.findAll)
-router.get('/:id', district.findById)
-router.put('/:id', district.update)
-router.delete('/:id', district.delete)
+const router = Router();
 
-module.exports = router
+router.post('/create', district.create);
+router.get('/all', district.findAll);
+router.get('/:id', district.findById);
+router.put('/:id', district.update);
+router.delete('/:id', district.delete);
+
+module.exports = router;

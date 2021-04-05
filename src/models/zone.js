@@ -19,6 +19,6 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         }
     }, {
         timestamps: false
-    })
-    return Zone
-}
+    });
+    return Zone;
+};

@@ -15,6 +15,6 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         }
     }, {
         timestamps: false
-    })
-    return Variable
-}
+    });
+    return Variable;
+};

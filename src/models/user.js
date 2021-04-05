@@ -20,6 +20,6 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
             type: Sequelize.STRING(100),
             allowNull: false
         },
-    })
-    return User
-}
+    });
+    return User;
+};

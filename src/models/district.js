@@ -10,6 +10,6 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
         },
     }, {
         timestamps: false
-    })
-    return District
-}
+    });
+    return District;
+};

@@ -15,6 +15,6 @@ module.exports = (sequelize, Sequelize, DataTypes) => {
             type: Sequelize.FLOAT,
             allowNull: false
         }
-    })
-    return Measurement
-}
+    });
+    return Measurement;
+};
