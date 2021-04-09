@@ -1,5 +1,6 @@
-const express = require('express');
-const routes = require('./routes');
+import express from 'express';
+import morgan from 'morgan';
+import routes from './routes';
 
 const app = express();
 
@@ -7,8 +8,9 @@ const app = express();
 app.set('port', process.env.PORT);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+app.use(morgan('dev'));
 
 // Routes
 app.use(routes);
 
-module.exports = app;
+export default app;

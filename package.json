@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index",
+    "dev": "nodemon src/index --exec babel-node",
     "start": "node src/index"
   },
   "keywords": [],
@@ -13,10 +13,15 @@
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "morgan": "^1.10.0",
     "mysql2": "^2.2.5",
     "sequelize": "^6.6.2"
   },
   "devDependencies": {
+    "@babel/cli": "^7.13.14",
+    "@babel/core": "^7.13.15",
+    "@babel/node": "^7.13.13",
+    "@babel/preset-env": "^7.13.15",
     "nodemon": "^2.0.7"
   }
 }
