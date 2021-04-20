@@ -1,9 +1,16 @@
+import bcrypt from 'bcryptjs';
 import { User } from '../models';
+
+const encryptPassword = async (password) => {
+    const salt = await bcrypt.genSalt(10);
+    return await bcrypt.hash(password, salt);
+};
 
 export const createUser = async (req, res) => {
     try {
         const { id, firstName, lastName, password, email, districtId } = req.body;
-        const userSaved = await User.create({ id, firstName, lastName, password, email, districtId });
+        const encryptedPassword = await encryptPassword(password);
+        const userSaved = await User.create({ id, firstName, lastName, password: encryptedPassword, email, districtId });
         res.status(201).json(userSaved);
     } catch (error) {
         res.status(500).json({
@@ -41,6 +48,10 @@ export const getUserById = async (req, res) => {
 export const updateUserById = async (req, res) => {
     try {
         const { id } = req.params;
+        if (req.body.password) {
+            const encryptedPassword = await encryptPassword(req.body.password);
+            req.body.password = encryptedPassword;
+        }
         const userUpdated = await User.update(req.body, {
             where: { id }
         });
