@@ -45,6 +45,21 @@ export const getUserById = async (req, res) => {
     }
 };
 
+export const getUserByEmail = async (req, res) => {
+    try {
+        const { email } = req.params;
+        const user = await User.findOne({
+            where: { email }
+        });
+        res.status(200).json(user);
+    } catch (error) {
+        res.status(500).json({
+            message:
+                error.message || `Error retrieving User with email=${email}`
+        });
+    }
+};
+
 export const updateUserById = async (req, res) => {
     try {
         const { id } = req.params;
