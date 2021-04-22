@@ -16,6 +16,6 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
     }
 })();
 
-sequelize.sync()
+/* sequelize.sync() */
 
 export default sequelize;
